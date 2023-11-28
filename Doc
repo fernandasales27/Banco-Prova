@@ -20,6 +20,13 @@ Funcionario (id , nome)
 	Produto 1     |  500.000,00
 	Produto 2     |  250.000,00
 
+SELECT p.nome, COUNT(i.id_produto)*p.preco as Valor_Total FROM produto as p
+JOIN item as i on p.id_produto=i.id_produto
+GROUP BY p.nome
+DESC
+LIMIT 2
+
+
 2. Selecione o nome da cidade e quantidade de produtos vendidos naquela cidade em um determinado ano, ex:
 	CIDADE  | PRODUTO  | QUANTIDADE |  ANO
           Palmares   | Produto 1      | 19                       | 2023
