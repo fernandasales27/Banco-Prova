@@ -1,0 +1,60 @@
+1- Banco de dados para auxiliar website de loja online de produtos de segurança. Deve conter informações relevantes para que seja realizada a compra de produtos, acompanhamento de pedidos, relação de vendas por funcionário, aplicação de cupons, entre outros. 
+
+Cliente (id, nome, idade,telefone, id_endereco)
+Pedido (id, , id_cliente, id_cupom, id_funcionario, data)
+Item Pedido (id,id_produto, id_Pedido,qnt)
+Produto (id, nome, preço, qtd_disponivel)
+Envio (id, id_status, id_pedido)
+Status (id, nome)
+Endereço (id,id_cidade, rua, numero)
+Cidade (id, nome, id_uf)
+UF (id, nome)
+Cupom (Id, nome, porcentagem, status)
+Funcionario (id , nome)
+
+
+
+1. Selecione o nome do produto e o valor total de vendas para aquele produto. Traga apenas os 2 produtos mais vendidos, ex:
+	PRODUTO  |  VALOR_TOTAL
+	Produto 1     |  500.000,00
+	Produto 2     |  250.000,00
+
+2. Selecione o nome da cidade e quantidade de produtos vendidos naquela cidade em um determinado ano, ex:
+	CIDADE  | PRODUTO  | QUANTIDADE |  ANO
+          Palmares   | Produto 1      | 19                       | 2023
+          Palmares   | Produto 2      | 196                     | 2022
+		…
+
+3. Selecione o nome do cliente, o telefone do cliente, o nome da cidade do cliente, para todos os clientes que possuem pedidos atrasados, ex:
+CLIENTE | TELEFONE | CIDADE 
+           Fernanda   | 81 98165423 | Palmares
+           Maria        | 81 585423 | Ribeirão
+
+4. Selecione o nome do produto mais vendido em cada cidade, ex:
+	CIDADE | PRODUTO | QUANTIDADE_ITENS
+	Palmares | Produto 1     | 450
+	Recife     | Produto  2    | 850
+	Olinda    | Produto 2      | 850
+
+5. Selecione a lista com os 5 cupons mais utilizados no ano de 2023, ex:
+	CUPOM 		| QUANTIDADE
+	Cupom Pondé     | 199
+	Cupom Karnal     | 200
+
+6. Selecione os nomes dos produtos que tiveram o total de vendas superior à média de vendas dos outros produtos. ex:
+	PRODUTO
+	Produto 1
+
+7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, ordenados por data (da mais recente para a mais antiga);
+
+8. Selecione o percentual de pedidos atrasados, considerando todos os pedidos pendentes, ex:
+	PERCENTUAL_ATRASOS
+	65%
+
+9. Selecione a média de idade dos clientes que compram cada produto, ex:
+	PRODUTO | MEDIA_IDADE
+	Produto 1    |  25
+	Produto 2    |  45
+
+10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, traga apenas os resultados de 2023 e não considere os cupons de 100% de desconto ex:
+DATA_PEDIDO | NOME_CUPOM | PERCENTAGEM | NOME_CLIENTE | NOME_FUNCIONARIO | TOTAL_COMPRA
