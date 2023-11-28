@@ -1,4 +1,5 @@
-1- Banco de dados para auxiliar website de loja online de produtos de segurança. Deve conter informações relevantes para que seja realizada a compra de produtos, acompanhamento de pedidos, relação de vendas por funcionário, aplicação de cupons, entre outros. 
+1- Banco de dados para auxiliar website de loja online de produtos de segurança. Deve conter informações relevantes para que seja realizada a compra de produtos, 
+acompanhamento de pedidos, relação de vendas por funcionário, aplicação de cupons, entre outros. 
 
 Cliente (id, nome, idade,telefone, id_endereco)
 Pedido (id, , id_cliente, id_cupom, id_funcionario, data)
@@ -45,7 +46,8 @@ CLIENTE | TELEFONE | CIDADE
 	PRODUTO
 	Produto 1
 
-7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, ordenados por data (da mais recente para a mais antiga);
+7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, 
+ordenados por data (da mais recente para a mais antiga);
 
 8. Selecione o percentual de pedidos atrasados, considerando todos os pedidos pendentes, ex:
 	PERCENTUAL_ATRASOS
@@ -56,5 +58,6 @@ CLIENTE | TELEFONE | CIDADE
 	Produto 1    |  25
 	Produto 2    |  45
 
-10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, traga apenas os resultados de 2023 e não considere os cupons de 100% de desconto ex:
+10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, 
+traga apenas os resultados de 2023 e não considere os cupons de 100% de desconto ex:
 DATA_PEDIDO | NOME_CUPOM | PERCENTAGEM | NOME_CLIENTE | NOME_FUNCIONARIO | TOTAL_COMPRA
