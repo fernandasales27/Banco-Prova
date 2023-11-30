@@ -38,11 +38,30 @@ CLIENTE | TELEFONE | CIDADE
            Fernanda   | 81 98165423 | Palmares
            Maria        | 81 585423 | Ribeirão
 
+SELECT c.nome, c.telefone, ci.nome  FROM cliente as c 
+JOIN endereco as e ON e.id_endereco = c.endereco
+JOIN cidade as ci ON ci.id_cidade = e.id_cidade
+JOIN pedido as pe ON pe.id_cliente = c.id_cliente
+JOIN envio as en ON en.id_pedido = pe.id_pedido
+WHERE en.id_status_pedido = 3;
+
+
 4. Selecione o nome do produto mais vendido em cada cidade, ex:
 	CIDADE | PRODUTO | QUANTIDADE_ITENS
 	Palmares | Produto 1     | 450
 	Recife     | Produto  2    | 850
 	Olinda    | Produto 2      | 850
+
+ERRADO
+SELECT ci.nome, resultado.p, resultado.qtd FROM (SELECT COUNT(i.id_pedido) as qtd, 				  i.id_produto as p FROM item as i
+      GROUP BY i.id_produto) as resultado
+JOIN cliente as c
+JOIN endereco as e ON e.id_endereco = c.endereco
+JOIN cidade as ci ON ci.id_cidade = e.id_cidade
+JOIN pedido as pe ON pe.id_cliente = c.id_cliente
+
+
+
 
 5. Selecione a lista com os 5 cupons mais utilizados no ano de 2023, ex:
 	CUPOM 		| QUANTIDADE
