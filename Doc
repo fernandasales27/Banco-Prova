@@ -31,15 +31,16 @@ LIMIT 2
 	CIDADE  | PRODUTO  | QUANTIDADE |  ANO
           Palmares   | Produto 1      | 19                       | 2023
           Palmares   | Produto 2      | 196                     | 2022
-		…
 
-SELECT ci.nome AS CIDADE, pro.nome AS PRODUTO, SUM(i.qtd) AS QUANTIDADE, 
-EXTRACT(YEAR FROM p.data_pedido) AS ANO FROM item AS i JOIN pedido AS p ON i.id_pedido = p.id_pedido 
-JOIN produto AS pro ON i.id_produto = pro.id_produto JOIN cliente AS c ON p.id_cliente = c.id_cliente 
-JOIN endereco AS e ON c.endereco = e.id_endereco 
-JOIN cidade AS ci ON e.id_cidade = ci.id_cidade 
-GROUP BY ci.nome, pro.nome, ANO 
-ORDER BY `ANO` DESC
+SELECT ci.nome AS CIDADE, pro.nome AS PRODUTO, SUM(i.qtd) AS QUANTIDADE, EXTRACT(YEAR FROM p.data_pedido) AS ANO
+FROM item AS i
+JOIN pedido AS p ON i.id_pedido = p.id_pedido
+JOIN produto AS pro ON i.id_produto = pro.id_produto
+JOIN cliente AS c ON p.id_cliente = c.id_cliente
+JOIN endereco AS e ON c.endereco = e.id_endereco
+JOIN cidade AS ci ON e.id_cidade = ci.id_cidade
+GROUP BY ci.nome, pro.nome;
+
 
 3. Selecione o nome do cliente, o telefone do cliente, o nome da cidade do cliente, para todos os clientes que possuem pedidos atrasados, ex:
 CLIENTE | TELEFONE | CIDADE 
@@ -116,6 +117,7 @@ WHERE
        total_vendas IS NOT NULL);
 
 
+
 7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, 
 ordenados por data (da mais recente para a mais antiga);
 
@@ -141,8 +143,12 @@ GROUP BY pe.data_pedido DESC;
 	PERCENTUAL_ATRASOS
 	65%
 SELECT (COUNT(CASE WHEN sp.id_status_pedido = 3 THEN 1 END) / COUNT(CASE WHEN sp.id_status_pedido = 2 OR sp.id_status_pedido = 3 THEN 1 END)) * 100 AS percentual_atrasado 
-FROM pedido p JOIN envio e ON p.id_pedido = e.id_pedido JOIN status_pedido sp ON e.id_status_pedido = sp.id_status_pedido 
+FROM pedido p 
+JOIN envio e ON p.id_pedido = e.id_pedido 
+JOIN status_pedido sp ON e.id_status_pedido = sp.id_status_pedido 
 WHERE sp.id_status_pedido IN (2, 3);
+
+
 9. Selecione a média de idade dos clientes que compram cada produto, ex:
 	PRODUTO | MEDIA_IDADE
 	Produto 1    |  25
@@ -154,6 +160,7 @@ JOIN item as i ON i.id_produto = p.id_produto
 JOIN pedido as pe ON pe.id_pedido = i.id_pedido
 JOIN cliente as c ON c.id_cliente = pe.id_cliente
 GROUP BY p.id_produto
+
 
 
 10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, 
