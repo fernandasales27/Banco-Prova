@@ -33,6 +33,7 @@ LIMIT 2
           Palmares   | Produto 2      | 196                     | 2022
 		…
 
+
 3. Selecione o nome do cliente, o telefone do cliente, o nome da cidade do cliente, para todos os clientes que possuem pedidos atrasados, ex:
 CLIENTE | TELEFONE | CIDADE 
            Fernanda   | 81 98165423 | Palmares
@@ -52,13 +53,19 @@ WHERE en.id_status_pedido = 3;
 	Recife     | Produto  2    | 850
 	Olinda    | Produto 2      | 850
 
-ERRADO
-SELECT ci.nome, resultado.p, resultado.qtd FROM (SELECT COUNT(i.id_pedido) as qtd, 				  i.id_produto as p FROM item as i
-      GROUP BY i.id_produto) as resultado
-JOIN cliente as c
-JOIN endereco as e ON e.id_endereco = c.endereco
-JOIN cidade as ci ON ci.id_cidade = e.id_cidade
-JOIN pedido as pe ON pe.id_cliente = c.id_cliente
+SELECT c.nome AS CIDADE, p.nome AS PRODUTO, SUM(i.qtd) AS QUANTIDADE_ITENS
+FROM item i
+JOIN produto p 
+ON i.id_produto = p.id_produto
+JOIN pedido pe
+ON i.id_pedido = pe.id_pedido
+JOIN cliente cl 
+ON pe.id_cliente = cl.id_cliente
+JOIN endereco e 
+ON cl.endereco = e.id_endereco
+JOIN cidade c 
+ON e.id_cidade = c.id_cidade
+GROUP BY c.nome, p.nome;
 
 
 
@@ -72,7 +79,8 @@ SELECT cu.nome as cupom, COUNT(cu.nome) as quantidade FROM pedido as p
 JOIN cupom as cu
 ON p.id_cupom = cu.id_cupom
 WHERE YEAR(p.data_pedido) = 2023
-GROUP BY cu.nome;
+GROUP BY cu.nome
+LIMIT 5;
 
 
 
@@ -119,20 +127,20 @@ JOIN pedido as pe ON pe.id_pedido = i.id_pedido
 JOIN cliente as c ON c.id_cliente = pe.id_cliente
 GROUP BY p.id_produto
 
+
 10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, 
 traga apenas os resultados de 2023 e não considere os cupons de 100% de desconto ex:
 DATA_PEDIDO | NOME_CUPOM | PERCENTAGEM | NOME_CLIENTE | NOME_FUNCIONARIO | TOTAL_COMPRA
 
-
-SELECT p.data_pedido, cu.nome, cu.porcentagem, c.nome as Cliente , f.nome as Funcioario FROM pedido as p
-
-JOIN cliente as c
-ON c.id_cliente = p.id_cliente
-JOIN cupom as cu
-ON cu.id_cupom = p.id_cupom
-JOIN funcionario as f
-ON f.id_func = p.id_funcionario
-
-WHERE YEAR(p.data_pedido) = 2023
+SELECT p.data_pedido as DATA_PEDIDO, cu.nome as NOME_CUPOM, cu.porcentagem as PERCENTAGEM, c.nome as CLIENTE, f.nome as NOME_FUNCIONARIO, SUM(i.qtd * pr.preco) as TOTAL_COMPRA
+FROM pedido as p
+JOIN cliente as c ON c.id_cliente = p.id_cliente
+JOIN cupom as cu ON cu.id_cupom = p.id_cupom
+JOIN funcionario as f ON f.id_func = p.id_funcionario
+JOIN item as i ON i.id_pedido = p.id_pedido
+JOIN produto as pr ON pr.id_produto = i.id_produto
+WHERE YEAR(p.data_pedido) = 2023 AND cu.porcentagem != '100%'
+GROUP BY p.id_pedido
 ORDER BY p.data_pedido ASC;
+
 
