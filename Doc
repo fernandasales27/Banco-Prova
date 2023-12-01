@@ -88,7 +88,8 @@ LIMIT 5;
 6. Selecione os nomes dos produtos que tiveram o total de vendas superior à média de vendas dos outros produtos. ex:
 	PRODUTO
 	Produto 1
-
+WITH TotalVendas AS ( SELECT p.nome AS nome_produto, COALESCE(SUM(i.qtd), 0) AS total_vendas FROM produto p LEFT JOIN item i ON p.id_produto = i.id_produto GROUP BY p.nome ) 
+SELECT nome_produto FROM TotalVendas WHERE total_vendas > (SELECT AVG(total_vendas) FROM TotalVendas WHERE total_vendas IS NOT NULL);
 
 7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, 
 ordenados por data (da mais recente para a mais antiga);
