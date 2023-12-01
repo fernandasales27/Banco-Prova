@@ -158,19 +158,20 @@ CREATE TABLE `item` (
   `id_produto` int(11) DEFAULT NULL,
   `id_pedido` int(11) DEFAULT NULL,
   `qtd` int(11) DEFAULT NULL
+  `preco` decimal(10,0) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `item`
 --
 
-INSERT INTO `item` (`id_item`, `id_produto`, `id_pedido`, `qtd`) VALUES
-(1, 1, 1, 1),
-(2, 1, 2, 1),
-(3, 1, 3, 1),
-(4, 2, 1, 1),
-(5, 2, 5, 1),
-(6, 2, 4, 1);
+INSERT INTO `item` (`id_item`, `id_produto`, `id_pedido`, `qtd`, `preco`) VALUES
+(1, 1, 1, 1, 3999),
+(2, 1, 2, 1, 3999),
+(3, 1, 3, 1, 3999),
+(4, 2, 1, 1, 3999),
+(5, 2, 5, 1, 3999),
+(6, 2, 4, 1, 3999);
 
 -- --------------------------------------------------------
 
@@ -267,6 +268,32 @@ INSERT INTO `uf` (`id_uf`, `nome`) VALUES
 (8, 'Piaui'),
 (9, 'Bahia');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `envio`
+--
+
+CREATE TABLE `envio` (
+  `id_envio` int(11) NOT NULL,
+  `id_status_pedido` int(11) NOT NULL,
+  `id_pedido` int(11) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `status_pedido`
+--
+
+INSERT INTO `envio` (`id_envio`, `id_status_pedido`, `id_pedido`) VALUES
+(1, 3, 1),
+(2, 1, 2),
+(3, 3, 3),
+(4, 2, 4),
+(5, 1, 5),
+(6, 3, 6);
+
+-- --------------------------------------------------------
+
 --
 -- Índices para tabelas despejadas
 --
@@ -340,6 +367,14 @@ ALTER TABLE `uf`
   ADD PRIMARY KEY (`id_uf`);
 
 --
+-- Índices para tabela `uf`
+--
+
+ALTER TABLE `envio`
+  ADD PRIMARY KEY (`id_envio`),
+  ADD KEY `id_status_pedido` (`id_status_pedido`),
+  ADD KEY `id_pedido` (`id_pedido`);
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
@@ -402,6 +437,11 @@ ALTER TABLE `status_pedido`
 --
 ALTER TABLE `uf`
   MODIFY `id_uf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT de tabela `pedido`
+--
+ALTER TABLE `envio`
+  MODIFY `id_envio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para despejos de tabelas
@@ -439,6 +479,13 @@ ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
   ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_cupom`) REFERENCES `cupom` (`id_cupom`),
   ADD CONSTRAINT `pedido_ibfk_3` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id_func`);
+--
+-- Limitadores para a tabela `pedido`
+--
+ALTER TABLE `envio`
+   ADD CONSTRAINT `envio_ibfk_1` FOREIGN KEY (`id_status_pedido`) REFERENCES `status_pedido` (`id_status_pedido`),
+  ADD CONSTRAINT `envio_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`),
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
