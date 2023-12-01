@@ -33,6 +33,24 @@ LIMIT 2
           Palmares   | Produto 2      | 196                     | 2022
 		…
 
+SELECT
+    c.nome AS nome_cidade,
+    EXTRACT(YEAR FROM pe.data_pedido) AS ano,
+    SUM(i.qtd) AS quantidade_produtos
+FROM
+    cidade c
+JOIN
+    endereco e ON c.id_cidade = e.id_cidade
+JOIN
+    cliente cl ON e.id_endereco = cl.endereco
+JOIN
+    pedido pe ON cl.id_cliente = pe.id_cliente
+JOIN
+    item i ON pe.id_pedido = i.id_pedido
+GROUP BY
+    c.nome, ano
+ORDER BY
+    c.nome, ano;
 
 3. Selecione o nome do cliente, o telefone do cliente, o nome da cidade do cliente, para todos os clientes que possuem pedidos atrasados, ex:
 CLIENTE | TELEFONE | CIDADE 
