@@ -68,6 +68,15 @@ JOIN pedido as pe ON pe.id_cliente = c.id_cliente
 	Cupom Pondé     | 199
 	Cupom Karnal     | 200
 
+SELECT cu.nome as cupom, COUNT(cu.nome) as quantidade FROM pedido as p
+JOIN cupom as cu
+ON p.id_cupom = cu.id_cupom
+WHERE YEAR(p.data_pedido) = 2023
+GROUP BY cu.nome;
+
+
+
+
 6. Selecione os nomes dos produtos que tiveram o total de vendas superior à média de vendas dos outros produtos. ex:
 	PRODUTO
 	Produto 1
@@ -87,3 +96,17 @@ ordenados por data (da mais recente para a mais antiga);
 10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, 
 traga apenas os resultados de 2023 e não considere os cupons de 100% de desconto ex:
 DATA_PEDIDO | NOME_CUPOM | PERCENTAGEM | NOME_CLIENTE | NOME_FUNCIONARIO | TOTAL_COMPRA
+
+
+SELECT p.data_pedido, cu.nome, cu.porcentagem, c.nome as Cliente , f.nome as Funcioario FROM pedido as p
+
+JOIN cliente as c
+ON c.id_cliente = p.id_cliente
+JOIN cupom as cu
+ON cu.id_cupom = p.id_cupom
+JOIN funcionario as f
+ON f.id_func = p.id_funcionario
+
+WHERE YEAR(p.data_pedido) = 2023
+ORDER BY p.data_pedido ASC;
+
