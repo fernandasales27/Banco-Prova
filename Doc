@@ -75,7 +75,7 @@ ON cl.endereco = e.id_endereco
 JOIN cidade c 
 ON e.id_cidade = c.id_cidade
 GROUP BY c.nome, p.nome;
-
+CORRIGIR
 
 
 
@@ -97,6 +97,7 @@ LIMIT 5;
 6. Selecione os nomes dos produtos que tiveram o total de vendas superior à média de vendas dos outros produtos. ex:
 	PRODUTO
 	Produto 1
+
 WITH TotalVendas AS (
     SELECT
         p.nome AS nome_produto,
@@ -122,7 +123,7 @@ WHERE
 7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, 
 ordenados por data (da mais recente para a mais antiga);
 
-SELECT c.nome AS nome_cliente, c.telefone, cid.nome AS cidade, uf.nome AS estado, pe.data_pedido AS data_pedido, i.qtd as quantidade, SUM(p.preco) AS total_pedido 
+SELECT c.nome AS nome_cliente, c.telefone, cid.nome AS cidade, uf.nome AS estado, pe.data_pedido AS data_pedido, i.qtd as quantidade,  SUM(p.preco * i.qtd) AS total_pedido 
 FROM cliente c 
 JOIN endereco e 
 ON c.endereco = e.id_endereco 
@@ -137,7 +138,7 @@ ON pe.id_pedido = i.id_pedido
 JOIN produto p 
 ON i.id_produto = p.id_produto 
 GROUP BY pe.data_pedido DESC;
-
+CORRIGIR
 
 
 8. Selecione o percentual de pedidos atrasados, considerando todos os pedidos pendentes, ex:
@@ -155,13 +156,13 @@ WHERE sp.id_status_pedido IN (2, 3);
 	Produto 1    |  25
 	Produto 2    |  45
 
-SELECT p.nome, AVG(c.idade) FROM 
-produto as p 
+SELECT DISTINCT p.nome AS PRODUTO, AVG(c.idade) as IDADE
+FROM produto as p 
 JOIN item as i ON i.id_produto = p.id_produto
 JOIN pedido as pe ON pe.id_pedido = i.id_pedido
 JOIN cliente as c ON c.id_cliente = pe.id_cliente
-GROUP BY p.id_produto
-
+GROUP BY p.id_produto;
+CORRIGIR
 
 
 10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, 
