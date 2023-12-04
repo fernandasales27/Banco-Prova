@@ -23,8 +23,9 @@ funcionario (id_funcionario, nome);
 SELECT p.nome, COUNT(i.id_produto)*p.preco as Valor_Total FROM produto as p
 JOIN item as i on p.id_produto=i.id_produto
 GROUP BY p.nome
+ORDER BY Valor_Total 
 DESC
-LIMIT 2
+LIMIT 2;
 
 
 2. Selecione o nome da cidade e quantidade de produtos vendidos naquela cidade em um determinado ano, ex:
