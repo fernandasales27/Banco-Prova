@@ -139,7 +139,7 @@ CORRIGIR
 8. Selecione o percentual de pedidos atrasados, considerando todos os pedidos pendentes, ex:
 	PERCENTUAL_ATRASOS
 	65%
-SELECT (COUNT(CASE WHEN sp.id_status_pedido = 3 THEN 1 END) / COUNT(CASE WHEN sp.id_status_pedido = 2 OR sp.id_status_pedido = 3 THEN 1 END)) * 100 AS percentual_atrasado 
+SELECT (COUNT(CASE WHEN sp.id_status_pedido = 3 THEN 1 END) / COUNT(CASE WHEN sp.id_status_pedido = 2 OR sp.id_status_pedido = 3 THEN 1 END)) * 100 AS PERCENTUAL_DE_ATRASADOS 
 FROM pedido p 
 JOIN envio e ON p.id_pedido = e.id_pedido 
 JOIN status_pedido sp ON e.id_status_pedido = sp.id_status_pedido 
