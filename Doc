@@ -89,7 +89,6 @@ LIMIT 5;
 
 
 
-
 6. Selecione os nomes dos produtos que tiveram o total de vendas superior à média de vendas dos outros produtos. ex:
 	PRODUTO
 	Produto 1
@@ -106,7 +105,7 @@ WITH TotalVendas AS (
         p.nome
 )
 SELECT
-    nome_produto
+    nome_produto as PRODUTO
 FROM
     TotalVendas
 WHERE
