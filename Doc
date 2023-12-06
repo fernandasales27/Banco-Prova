@@ -64,18 +64,14 @@ WHERE en.id_status_pedido = 3;
 
 SELECT c.nome AS CIDADE, p.nome AS PRODUTO, SUM(i.qtd) AS QUANTIDADE_ITENS
 FROM item i
-JOIN produto p 
-ON i.id_produto = p.id_produto
-JOIN pedido pe
-ON i.id_pedido = pe.id_pedido
-JOIN cliente cl 
-ON pe.id_cliente = cl.id_cliente
-JOIN endereco e 
-ON cl.endereco = e.id_endereco
-JOIN cidade c 
-ON e.id_cidade = c.id_cidade
-GROUP BY c.nome, p.nome;
-CORRIGIR
+JOIN pedido pe ON i.id_pedido = pe.id_pedido
+JOIN cliente cl ON pe.id_cliente = cl.id_cliente
+JOIN endereco e ON cl.endereco = e.id_endereco
+JOIN cidade c ON e.id_cidade = c.id_cidade
+JOIN produto p ON i.id_produto = p.id_produto
+GROUP BY c.id_cidade, p.id_produto
+ORDER BY SUM(i.qtd) DESC;
+
 
 
 
@@ -156,13 +152,13 @@ WHERE sp.id_status_pedido IN (2, 3);
 	Produto 1    |  25
 	Produto 2    |  45
 
-SELECT DISTINCT p.nome AS PRODUTO, AVG(c.idade) as IDADE
-FROM produto as p 
-JOIN item as i ON i.id_produto = p.id_produto
-JOIN pedido as pe ON pe.id_pedido = i.id_pedido
-JOIN cliente as c ON c.id_cliente = pe.id_cliente
+SELECT p.nome AS PRODUTO, AVG(cl.idade) AS MEDIA_IDADE
+FROM item i
+JOIN pedido pe ON i.id_pedido = pe.id_pedido
+JOIN cliente cl ON pe.id_cliente = cl.id_cliente
+JOIN produto p ON i.id_produto = p.id_produto
 GROUP BY p.id_produto;
-CORRIGIR
+
 
 
 10. Selecione o relatório de uso de todos os cupons. Ordene os resultados pela data, da mais antiga para a mais nova. Além disso, 
