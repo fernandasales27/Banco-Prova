@@ -164,14 +164,14 @@ GROUP BY p.id_produto;
 traga apenas os resultados de 2023 e não considere os cupons de 100% de desconto ex:
 DATA_PEDIDO | NOME_CUPOM | PERCENTAGEM | NOME_CLIENTE | NOME_FUNCIONARIO | TOTAL_COMPRA
 
-SELECT p.data_pedido as DATA_PEDIDO, cu.nome as NOME_CUPOM, cu.porcentagem as PERCENTAGEM, c.nome as CLIENTE, f.nome as NOME_FUNCIONARIO, SUM(i.qtd * pr.preco) as TOTAL_COMPRA
+SELECT p.data_pedido as DATA_PEDIDO, cup.nome as NOME_CUPOM, cu.porcentagem as PERCENTAGEM, c.nome as CLIENTE, f.nome as NOME_FUNCIONARIO, SUM(i.qtd * pr.preco) as TOTAL_COMPRA
 FROM pedido as p
 JOIN cliente as c ON c.id_cliente = p.id_cliente
-JOIN cupom as cu ON cu.id_cupom = p.id_cupom
+JOIN cupom as cup ON cu.id_cupom = p.id_cupom
 JOIN funcionario as f ON f.id_func = p.id_funcionario
 JOIN item as i ON i.id_pedido = p.id_pedido
 JOIN produto as pr ON pr.id_produto = i.id_produto
-WHERE YEAR(p.data_pedido) = 2023 AND cu.porcentagem != '100%'
+WHERE YEAR(p.data_pedido) = 2023 AND cup.porcentagem != '100%'
 GROUP BY p.id_pedido
 ORDER BY p.data_pedido ASC;
 
