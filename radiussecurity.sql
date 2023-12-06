@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `cidade` (
   `id_cidade` int(11) NOT NULL,
   `nome` varchar(200) DEFAULT NULL,
-  `id_uf` int(11) DEFAULT NULL
+  `id_uf` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -58,7 +58,7 @@ CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `idade` int(11) DEFAULT NULL,
-  `telefone` int(11) DEFAULT NULL,
+  `telefone` int(11) NOT NULL,
   `endereco` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -107,7 +107,7 @@ CREATE TABLE `endereco` (
   `id_endereco` int(11) NOT NULL,
   `rua` varchar(200) DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
-  `id_cidade` int(11) DEFAULT NULL
+  `id_cidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -179,7 +179,7 @@ INSERT INTO `funcionario` (`id_func`, `nome`) VALUES
 
 CREATE TABLE `item` (
   `id_item` int(11) NOT NULL,
-  `id_produto` int(11) DEFAULT NULL,
+  `id_produto` int(11) NOT NULL,
   `id_pedido` int(11) DEFAULT NULL,
   `qtd` int(11) DEFAULT NULL,
   `preco` decimal(10,0) DEFAULT NULL
@@ -206,7 +206,7 @@ INSERT INTO `item` (`id_item`, `id_produto`, `id_pedido`, `qtd`, `preco`) VALUES
 
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
+  `id_cliente` int(11) NOT NULL,
   `id_cupom` int(11) DEFAULT NULL,
   `id_funcionario` int(11) DEFAULT NULL,
   `data_pedido` date DEFAULT NULL
