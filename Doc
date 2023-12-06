@@ -118,7 +118,7 @@ WHERE
 7. Selecione o nome do cliente, o telefone, a cidade, o estado, a data do pedido, o total (preço) do pedido e a quantidade de itens comprados, 
 ordenados por data (da mais recente para a mais antiga);
 
-SELECT c.nome AS nome_cliente, c.telefone, cid.nome AS cidade, uf.nome AS estado, pe.data_pedido AS data_pedido, i.qtd as quantidade,  SUM(p.preco * i.qtd) AS total_pedido 
+SELECT c.nome AS CLIENTE, c.telefone AS TELEFONE, cid.nome AS CIDADE, uf.nome AS ESTADO, pe.data_pedido AS DATA_DO_PEDIDO, i.qtd as QUANTIDADE,  SUM(p.preco * i.qtd) AS TOTAL_PEDIDO 
 FROM cliente c 
 JOIN endereco e 
 ON c.endereco = e.id_endereco 
