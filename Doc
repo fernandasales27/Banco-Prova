@@ -167,7 +167,7 @@ DATA_PEDIDO | NOME_CUPOM | PERCENTAGEM | NOME_CLIENTE | NOME_FUNCIONARIO | TOTAL
 SELECT p.data_pedido as DATA_PEDIDO, cup.nome as NOME_CUPOM, cup.porcentagem as PERCENTAGEM, c.nome as CLIENTE, f.nome as NOME_FUNCIONARIO, SUM(i.qtd * pr.preco) as TOTAL_COMPRA
 FROM pedido as p
 JOIN cliente as c ON c.id_cliente = p.id_cliente
-JOIN cupom as cup ON cu.id_cupom = p.id_cupom
+JOIN cupom as cup ON cup.id_cupom = p.id_cupom
 JOIN funcionario as f ON f.id_func = p.id_funcionario
 JOIN item as i ON i.id_pedido = p.id_pedido
 JOIN produto as pr ON pr.id_produto = i.id_produto
