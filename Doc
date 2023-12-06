@@ -20,7 +20,7 @@ funcionario (id_funcionario, nome);
 	Produto 1     |  500.000,00
 	Produto 2     |  250.000,00
 
-SELECT p.nome, COUNT(i.id_produto)*p.preco as Valor_Total FROM produto as p
+SELECT p.nome AS PRODUTO, COUNT(i.id_produto)*p.preco as VALOR_TOTAL FROM produto as p
 JOIN item as i on p.id_produto=i.id_produto
 GROUP BY p.nome
 ORDER BY Valor_Total 
@@ -80,11 +80,11 @@ ORDER BY SUM(i.qtd) DESC;
 	Cupom Pondé     | 199
 	Cupom Karnal     | 200
 
-SELECT cu.nome as cupom, COUNT(cu.nome) as quantidade FROM pedido as p
-JOIN cupom as cu
-ON p.id_cupom = cu.id_cupom
+SELECT c.nome as CUPOM, COUNT(c.nome) as QUANTIDADE FROM pedido as p
+JOIN cupom as c
+ON p.id_cupom = c.id_cupom
 WHERE YEAR(p.data_pedido) = 2023
-GROUP BY cu.nome
+GROUP BY c.nome
 LIMIT 5;
 
 
