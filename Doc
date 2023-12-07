@@ -157,7 +157,7 @@ FROM item i
 JOIN pedido pe ON i.id_pedido = pe.id_pedido
 JOIN cliente cl ON pe.id_cliente = cl.id_cliente
 JOIN produto p ON i.id_produto = p.id_produto
-GROUP BY p.id_produto;
+GROUP BY p.id_produto, p.nome;
 
 
 
