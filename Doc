@@ -85,6 +85,7 @@ JOIN cupom as c
 ON p.id_cupom = c.id_cupom
 WHERE YEAR(p.data_pedido) = 2023
 GROUP BY c.nome
+ORDER BY QUANTIDADE DESC
 LIMIT 5;
 
 
